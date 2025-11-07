@@ -47,7 +47,7 @@ cinescope/
 
 Step 1: Clone the repository
 
-git clone https://github.com/yourusername/cinescope.git
+git clone https://github.com/sulemangulzar/react-movies-website
 cd cinescope
 
 
@@ -65,14 +65,3 @@ Step 4: Open in browser
 
 http://localhost:5173
 
-🧠 How It Works
-
-The Home page allows users to search movies (case-insensitive).
-
-The MovieCards component shows 8 random movies each load.
-
-Clicking “See All” opens /movies, which shows all movies with filters.
-
-About and Contact pages are accessible from the NavBar.
-
-The Footer remains consistent across all pages.
