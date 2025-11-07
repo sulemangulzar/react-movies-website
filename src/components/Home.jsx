@@ -1,24 +1,25 @@
-import React, { useState, useMemo } from "react";
-import { movies } from "../movies";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { searchMovies } from "../services/api";
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     const value = e.target.value;
     setSearchTerm(value);
 
     if (value.trim() === "") {
       setFilteredMovies([]);
-    } else {
-      const results = movies.filter((movie) =>
-        movie.title.toLowerCase().includes(value.toLowerCase())
-      );
-      setFilteredMovies(results);
+      return;
     }
+
+    setLoading(true);
+    const results = await searchMovies(value);
+    setFilteredMovies(results.slice(0, 8)); // show top 8
+    setLoading(false);
   };
 
   return (
@@ -30,7 +31,7 @@ function Home() {
         Discover trending movies, spy thrillers, and cinematic masterpieces.
       </p>
 
-      <div className="flex flex-col items-center gap-6">
+      <div className="flex flex-col items-center gap-4 relative">
         <div className="relative w-full sm:w-[600px] md:w-[800px] max-w-[90vw]">
           <input
             type="search"
@@ -40,53 +41,39 @@ function Home() {
             className="w-full h-14 sm:h-16 outline-none bg-linear-to-r from-yellow-400 via-orange-400 to-red-500 text-black rounded-3xl px-5 text-base sm:text-lg font-medium placeholder-black"
           />
 
-          {/* 🔽 Animated Dropdown */}
+          {/* Dropdown results */}
+          {filteredMovies.length > 0 && (
+            <div className="absolute mt-2 w-full bg-gray-800 rounded-2xl shadow-lg p-3 animate-fade-in overflow-x-auto flex gap-4">
+              {filteredMovies.map((movie) => (
+                <div
+                  key={movie.id}
+                  className="min-w-[160px] bg-gray-900 rounded-xl overflow-hidden hover:scale-105 transition-transform"
+                >
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    className="w-full h-52 object-cover"
+                  />
+                  <p className="text-center text-sm mt-2 px-2">{movie.title}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* 🧭 Social Buttons (only when not searching) */}
         {!searchTerm && (
           <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
-            {["YouTube", "X", "Instagram", "TikTok", "Discord"].map(
-              (platform) => (
-                <button
-                  key={platform}
-                  className="px-4 sm:px-6 py-2 bg-linear-to-r from-yellow-400 via-orange-400 to-red-500 text-black rounded-xl text-sm sm:text-base font-medium hover:scale-105 transition-transform"
-                >
-                  {platform}
-                </button>
-              )
-            )}
+            {["YouTube", "X", "Instagram", "TikTok", "Discord"].map((platform) => (
+              <button
+                key={platform}
+                className="px-4 sm:px-6 py-2 bg-linear-to-r from-yellow-400 via-orange-400 to-red-500 text-black rounded-xl text-sm sm:text-base font-medium hover:scale-105 transition-transform"
+              >
+                {platform}
+              </button>
+            ))}
           </div>
         )}
       </div>
-
-{/* 🎞 Horizontal Movie Cards */}
-{filteredMovies.length > 0 && (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 0.1 }}
-    className="mt-10 overflow-x-auto whitespace-nowrap px-2 no-scrollbar"
-  >
-    <div className="flex gap-5 pb-4">
-      {filteredMovies.map((movie) => (
-        <motion.div
-          key={movie.id}
-          whileHover={{ scale: 1.05 }}
-          className="bg-gray-800 rounded-2xl shadow-lg min-w-[180px] sm:min-w-[220px] p-3"
-        >
-          <img
-            src={movie.poster_url}
-            alt={movie.title}
-            className="w-full h-48 object-cover rounded-xl mb-2"
-          />
-          <h3 className="font-semibold text-sm sm:text-base truncate">{movie.title}</h3>
-          <p className="text-gray-400 text-xs mt-1">{movie.genre || "Unknown Genre"}</p>
-        </motion.div>
-      ))}
-    </div>
-  </motion.div>
-      )}
 
       {!searchTerm && (
         <div className="flex justify-center mt-8">
