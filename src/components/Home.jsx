@@ -43,7 +43,7 @@ function Home() {
 
           {/* Dropdown results */}
           {filteredMovies.length > 0 && (
-            <div className="absolute mt-2 w-full bg-gray-800 rounded-2xl shadow-lg p-3 animate-fade-in overflow-x-auto flex gap-4">
+            <div className="no-scrollbar absolute mt-2 w-full bg-gray-800 rounded-2xl shadow-lg p-3 animate-fade-in overflow-x-auto flex gap-4">
               {filteredMovies.map((movie) => (
                 <div
                   key={movie.id}

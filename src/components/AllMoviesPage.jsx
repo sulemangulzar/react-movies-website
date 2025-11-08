@@ -134,19 +134,19 @@ function AllMoviesPage() {
 
   return (
     <>
-      <section className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-950 text-white py-24 px-4 sm:px-8">
+      <section className="min-h-screen bg-linear-to-b from-gray-900 via-black to-gray-950 text-white py-24 px-4 sm:px-8">
         {/* Top Bar */}
-        <div className="fixed top-0 left-0 w-full h-16 bg-gradient-to-b from-gray-950 to-gray-900 text-white px-6 sm:px-16 py-4 flex items-center justify-between z-50 shadow-md">
+        <div className="fixed top-0 left-0 w-full h-16 bg-linear-to-b from-gray-950 to-gray-900 text-white px-6 sm:px-16 py-4 flex items-center justify-between z-50 shadow-md">
           <h1 className="text-2xl sm:text-3xl font-semibold">🎬 CineScope</h1>
           <Link to="/">
-            <button className="bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold px-4 py-2 rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
+            <button className="bg-linear-to-r from-orange-500 to-yellow-400 text-black font-semibold px-4 py-2 rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
               Home
             </button>
           </Link>
         </div>
 
         {/* Header */}
-        <h1 className="text-4xl font-bold text-center mt-8 mb-10 bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold text-center mt-8 mb-10 bg-linear-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent">
           All Movies
         </h1>
 
@@ -176,7 +176,7 @@ function AllMoviesPage() {
         <div className="flex justify-center mb-6 sm:hidden">
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold hover:scale-105 transition-all"
+            className="flex items-center gap-2 px-5 py-2 rounded-lg bg-linear-to-r from-orange-500 to-yellow-400 text-black font-semibold hover:scale-105 transition-all"
           >
             <Filter size={18} />
             {showFilters ? "Hide Filters" : "Show Filters"}
@@ -193,7 +193,7 @@ function AllMoviesPage() {
             <div key={label} className="flex flex-col items-center">
               <label className="text-sm text-gray-400 mb-1">{label}</label>
               <select
-                className="bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 text-sm cursor-pointer focus:outline-none focus:border-orange-400 hover:border-orange-400 transition-all duration-300 shadow-md"
+                className="bg-gray-900 border no-scrollbar border-gray-800 rounded-xl px-4 py-2 text-sm cursor-pointer focus:outline-none focus:border-orange-400 hover:border-orange-400 transition-all duration-300 shadow-md"
                 value={value}
                 onChange={(e) => setter(e.target.value)}
               >
@@ -265,7 +265,7 @@ function AllMoviesPage() {
               <div className="flex justify-center mt-10">
                 <button
                   onClick={handleLoadMore}
-                  className="bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold px-8 py-3 rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
+                  className="bg-linear-to-r from-orange-500 to-yellow-400 text-black font-semibold px-8 py-3 rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
                 >
                   See More Movies
                 </button>
@@ -277,7 +277,7 @@ function AllMoviesPage() {
             <p className="text-gray-400 text-lg mb-4">No movies match your filters 😢</p>
             <button
               onClick={clearFilters}
-              className="bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold px-6 py-2 rounded-lg hover:scale-105 transition-all duration-300"
+              className="bg-linear-to-r from-orange-500 to-yellow-400 text-black font-semibold px-6 py-2 rounded-lg hover:scale-105 transition-all duration-300"
             >
               Clear Filters
             </button>
