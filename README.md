@@ -1,5 +1,5 @@
 🎬 CineScope — Movie Discovery Web App
-
+Check This Out: https://react-cinescope.vercel.app
 CineScope is a modern, responsive React web application that lets users search, explore, and filter trending movies in an elegant cinematic interface.
 It’s built with React, TailwindCSS, and React Router to ensure smooth navigation and vibrant visuals.
 
